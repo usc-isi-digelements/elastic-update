@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>elastic-update Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../../elastic-client/elastic-client.html">
+    <link rel="import" href="../elastic-update.html">
+  </head>
+  <body unresolved>
+    <template is="dom-bind">
+      <elastic-client
+        config='{"host": "http://localhost:9200"}'
+        client="{{esclient}}"
+        cluster-status="{{my-status}}">
+      </elastic-client>
+
+      <elastic-update
+        client="[[esclient]]"
+        index="mockads"
+        id="4"
+        elastic-type="ad"
+        body='{doc: {title: "shore, I thought I would sail about a\n"}}'
+        results="{{data}}" 
+        lastError="{{error}}"> 
+      </elastic-update>
+
+      <h4>Record info after update on mockads index:</h4>
+      <p>ID of record updated: {{data._id}}</p>
+      <p>Current record version: {{data._version}}</p>
+
+    </template>
+  </body>
+</html>
