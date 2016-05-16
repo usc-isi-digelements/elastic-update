@@ -19,15 +19,11 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.1.0",
-    "elastic-client": "DigElements/elastic-client#^0.0.3",
-    "lodash": "^4.6.1"
+    "elastic-client": "DigElements/elastic-client#^0.0.3"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
     "web-component-tester": "*",
-    "elastic.js": "^1.2.0"
-  },
-  "resolutions": {
-    "lodash": "^4.6.1"
+    "elasticsearch": "~10.1.2"
   }
 }
