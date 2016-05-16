@@ -4,7 +4,7 @@
   "authors": [
     "Rachel Artiss"
   ],
-  "description": "An element providing a solution to no problem in particular.",
+  "description": "Element providing a way to update a single elasticsearch document based on an _id. ",
   "keywords": [
     "Elasticsearch",
     "web-component",
