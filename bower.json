@@ -2,17 +2,17 @@
   "name": "elastic-update",
   "version": "1.0.3",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Rachel Artiss"
   ],
   "description": "An element providing a solution to no problem in particular.",
   "keywords": [
+    "Elasticsearch",
     "web-component",
-    "polymer",
-    "seed"
+    "polymer"
   ],
   "main": "elastic-update.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "homepage": "https://github.com/DigElements/elastic-update/",
   "ignore": [
     "/.*",
     "/test/"
