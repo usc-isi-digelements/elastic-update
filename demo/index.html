@@ -10,7 +10,10 @@
     <link rel="import" href="../elastic-update.html">
   </head>
   <body unresolved>
-    <template is="dom-bind">
+    <template is="dom-bind" id="demo">
+      <p>Request body: {doc: {title: "shore, I thought I would sail about a\n"}}</p>
+      <p>Record id to update in mockads index: 3</p>
+
       <elastic-client
         config='{"host": "http://localhost:9200"}'
         client="{{esclient}}"
@@ -20,17 +23,24 @@
       <elastic-update
         client="[[esclient]]"
         index="mockads"
-        id="4"
+        id="3"
         elastic-type="ad"
         body='{doc: {title: "shore, I thought I would sail about a\n"}}'
         results="{{data}}" 
-        lastError="{{error}}"> 
+        last-error="{{error}}">
       </elastic-update>
 
-      <h4>Record info after update on mockads index:</h4>
-      <p>ID of record updated: {{data._id}}</p>
-      <p>Current record version: {{data._version}}</p>
+      <p>Record info after update on mockads index: {{stringify(data)}}</p>
 
     </template>
+    <script>
+      (function(document) {
+        var demo = document.querySelector('#demo');
+
+        demo.stringify = function(json) {
+          return JSON.stringify(json);
+        };
+      })(document);
+    </script>
   </body>
 </html>

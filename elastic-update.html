@@ -11,25 +11,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!--
 
-        Element providing a way to update a single elasticsearch document based on an _id. 
+Element providing a way to update a single elasticsearch document based on an _id. 
 
-        Example:
+Example:
 
-        <elastic-client
-            config='{"host": "http://localhost:9200"}'
-            client="{{esclient}}"
-            cluster-status="{{my-status}}">
-        </elastic-client>
+    <elastic-client
+        config='{"host": "http://localhost:9200"}'
+        client="{{esclient}}"
+        cluster-status="{{my-status}}">
+    </elastic-client>
 
-        <elastic-update
-            client="[[esclient]]"
-            index="mockads"
-            id="4"
-            elastic-type="ad"
-            body='{doc: {title: "new title here"}}'
-            results="{{data}}"
-            lastError="{{error}}">
-        </elastic-update>
+    <elastic-update
+        client="[[esclient]]"
+        index="mockads"
+        id="4"
+        elastic-type="ad"
+        body='{doc: {title: "new title here"}}'
+        results="{{data}}"
+        lastError="{{error}}">
+    </elastic-update>
 
 @demo demo/index.html
 
