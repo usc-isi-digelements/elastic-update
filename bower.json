@@ -1,8 +1,8 @@
 {
   "name": "elastic-update",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "authors": [
-    "Rachel Artiss"
+    "Next Century Corporation"
   ],
   "description": "Element providing a way to update a single elasticsearch document based on an _id. ",
   "keywords": [
