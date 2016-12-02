@@ -67,6 +67,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.deepEqual(esUpdateBad.elasticType, 'ad');
         });
 
+        test('body property is undefined by default', function() {
+          assert.isUndefined(esUpdate.body);
+          assert.isUndefined(esUpdateBad.body);
+        });
+
         test('performs an update', function (done) {
           esUpdate.addEventListener('results-changed', function (event) {
             assert.deepEqual(esUpdate.body, {doc: {title: "shore, I thought I would sail about a\n"}});
