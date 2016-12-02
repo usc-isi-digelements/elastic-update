@@ -25,7 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-- You can use the document as a place to set up your fixtures. -->
     <test-fixture id="elastic-update-fixture">
       <template>
-        <elastic-update index="mockads" id="4" elastic-type="ad" 
+        <elastic-update index="mockads" id="3" elastic-type="ad" 
           results="{{data}}" error="{{error}}">
         </elastic-update>
       </template>
@@ -37,7 +37,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </elastic-update>
       </template>
     </test-fixture>
-    
 
     <script>
       var client, esUpdate, esUpdateBad;
@@ -55,14 +54,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('defines the index property', function () {
           assert.equal(esUpdate.index, 'mockads');
+          assert.equal(esUpdateBad.index, 'mockads');
         });
 
         test('defines the id property', function () {
-          assert.equal(esUpdate.id, '4');
+          assert.equal(esUpdate.id, '3');
+          assert.equal(esUpdateBad.id, '2didk');
         });
 
         test('defines the elastic-type property', function() {
           assert.deepEqual(esUpdate.elasticType, 'ad');
+          assert.deepEqual(esUpdateBad.elasticType, 'ad');
         });
 
         test('performs an update', function (done) {
