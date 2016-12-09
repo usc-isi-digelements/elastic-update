@@ -76,6 +76,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           assert.isUndefined(esUpdateBad.lastError);
         });
 
+        test('does not have html content', function() {
+          assert.deepEqual(Polymer.dom(esUpdate.root).children.length, 0);
+        });
+
         test('performs an update', function (done) {
           esUpdate.addEventListener('results-changed', function (event) {
             assert.deepEqual(esUpdate.body, {doc: {title: "shore, I thought I would sail about a\n"}});
