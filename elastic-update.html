@@ -66,7 +66,8 @@ A Polymer Element providing a way to update a single elasticsearch document base
         /**
          * (Required)
          *
-         * The _id of elasticsearch record to update.
+         * The _id of elasticsearch record to update.  Note:  Set the id first and then set the body to trigger an update else you might
+         * trigger two updates if the id was still set from a previous update.
          *
          * @type {String}
          */
@@ -77,7 +78,9 @@ A Polymer Element providing a way to update a single elasticsearch document base
         /**
          * (Required)
          *
-         * Can contain either a partial document, which will be merged with the existing one, or a script to update the document content.  (See https://www.elastic.co for the update API.)
+         * Can contain either a partial document, which will be merged with the existing one, or a script to update the document content.
+         * The body will be set to undefined after each update.
+         * (See https://www.elastic.co for the update API.)
          *
          * @type {Object}
          */
@@ -132,9 +135,11 @@ A Polymer Element providing a way to update a single elasticsearch document base
             type: self.elasticType,
             body: self.body
         }).then(function(results) {
+            self.set('body', undefined);
             self._setResults(results);
             self._setLastError(null);
         }).catch(function(err) {
+            self.set('body', undefined);
             self._setLastError(err);
         });
     }

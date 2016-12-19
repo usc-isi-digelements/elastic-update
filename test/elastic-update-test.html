@@ -69,7 +69,7 @@
 
         test('performs an update', function (done) {
           esUpdate.addEventListener('results-changed', function (event) {
-            assert.deepEqual(esUpdate.body, {doc: {title: "shore, I thought I would sail about a\n"}});
+            assert.isUndefined(esUpdate.body);
             assert.equal(esUpdate.results._index, esUpdate.index);
             assert.equal(esUpdate.results._type, esUpdate.elasticType);
             assert.equal(esUpdate.results._id, esUpdate.id);
@@ -82,7 +82,7 @@
 
         test('if error occurs, persists error to lastError', function (done) {
           esUpdateBad.addEventListener('last-error-changed', function (event) {
-            assert.deepEqual(esUpdateBad.body, {doc: {title: "shore, I thought I would sail about a\n"}});
+            assert.isUndefined(esUpdateBad.body);
             assert.isDefined(esUpdateBad.lastError);
             done();
           });
