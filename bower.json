@@ -1,10 +1,9 @@
 {
   "name": "elastic-update",
-  "version": "1.0.6",
-  "authors": [
-    "Next Century Corporation"
-  ],
   "description": "A Polymer Element providing a way to update a single elasticsearch document based on an _id.",
+  "version": "1.0.6",
+  "authors": ["Next Century Corporation"],
+  "license": "Apache-2.0",
   "keywords": [
     "web-component",
     "polymer",
