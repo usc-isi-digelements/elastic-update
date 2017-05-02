@@ -1,7 +1,7 @@
 {
   "name": "elastic-update",
   "description": "A Polymer Element providing a way to update a single elasticsearch document based on an _id.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
   "keywords": [
@@ -19,9 +19,7 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.7.0",
-    "elastic-client": "DigElements/elastic-client#^1.0.3",
-    "elasticsearch": "^11.0.1",
-    "elastic.js": "DigElements/elastic.js#6639a1030eb071fb762bcdd742fdbf037fb57b24"
+    "elastic-client": "DigElements/elastic-client#^1.0.3"
   },
   "devDependencies": {
     "elastic-client-search": "DigElements/elastic-client-search#^1.0.17",
