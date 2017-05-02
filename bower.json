@@ -1,7 +1,7 @@
 {
   "name": "elastic-update",
   "description": "A Polymer Element providing a way to update a single elasticsearch document based on an _id.",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
   "keywords": [
@@ -12,7 +12,6 @@
     "elastic.js"
   ],
   "main": "elastic-update.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/DigElements/elastic-update/",
   "ignore": [
     "/.*",

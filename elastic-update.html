@@ -46,94 +46,94 @@ A Polymer Element providing a way to update a single elasticsearch document base
     is: 'elastic-update',
 
     properties: {
-        /**
-         * (Required)
-         *
-         * An instance of elasticsearch.Client which is connected to an elasticsearch server.
-         *
-         * @type {Object}
-         */
-        client: {
-            type: Object
-        },
+      /**
+       * (Required)
+       *
+       * An instance of elasticsearch.Client which is connected to an elasticsearch server.
+       *
+       * @type {Object}
+       */
+      client: {
+        type: Object
+      },
 
-        /**
-         * (Required)
-         *
-         * The elastic index (database name).
-         *
-         * @type {String}
-         */
-        index: {
-            type: String
-        },
+      /**
+       * (Required)
+       *
+       * The elastic index (database name).
+       *
+       * @type {String}
+       */
+      index: {
+        type: String
+      },
 
-        /**
-         * (Required)
-         *
-         * The type of the elasticsearch record to update.
-         *
-         * @type {String}
-         */
-        elasticType: {
-            type: String
-        },
+      /**
+       * (Required)
+       *
+       * The type of the elasticsearch record to update.
+       *
+       * @type {String}
+       */
+      elasticType: {
+        type: String
+      },
 
-        /**
-         * (Required)
-         *
-         * The _id of elasticsearch record to update.  Note:  Set the id first and then set the body to trigger an update else you might
-         * trigger two updates if the id was still set from a previous update.
-         *
-         * @type {String}
-         */
-        id: {
-          type: String
-        },
+      /**
+       * (Required)
+       *
+       * The _id of elasticsearch record to update.  Note:  Set the id first and then set the body to trigger an update else you might
+       * trigger two updates if the id was still set from a previous update.
+       *
+       * @type {String}
+       */
+      id: {
+        type: String
+      },
 
-        /**
-         * (Required)
-         *
-         * Can contain either a partial document, which will be merged with the existing one, or a script to update the document content.
-         * The body will be set to undefined after each update.
-         * (See https://www.elastic.co for the update API.)
-         *
-         * @type {Object}
-         */
-        body: {
-            type: Object,
-            notify: true
-        },
+      /**
+       * (Required)
+       *
+       * Can contain either a partial document, which will be merged with the existing one, or a script to update the document content.
+       * The body will be set to undefined after each update.
+       * (See https://www.elastic.co for the update API.)
+       *
+       * @type {Object}
+       */
+      body: {
+        type: Object,
+        notify: true
+      },
 
-        /**
-         * (Output)
-         *
-         * Result after a successful update including current version number
-         *
-         * @type {Object}
-         * @default null
-         */
-        results: {
-            type: Object,
-            notify: true,
-            readOnly: true,
-            value: null
-        },
+      /**
+       * (Output)
+       *
+       * Result after a successful update including current version number
+       *
+       * @type {Object}
+       * @default null
+       */
+      results: {
+        type: Object,
+        notify: true,
+        readOnly: true,
+        value: null
+      },
 
-        /**
-         * (Output)
-         *
-         * either null or an error object that was returned from elastic search server.
-         */
-        lastError: {
-            type: Object,
-            notify: true,
-            readOnly: true
-        }
+      /**
+       * (Output)
+       *
+       * either null or an error object that was returned from elastic search server.
+       */
+      lastError: {
+        type: Object,
+        notify: true,
+        readOnly: true
+      }
     },
 
     observers: [
-        '_update(body, id, elasticType, client, index)'
+      '_update(body, id, elasticType, client, index)'
     ],
 
     /**
@@ -143,21 +143,21 @@ A Polymer Element providing a way to update a single elasticsearch document base
     * @private
     */
     _update: function() {
-        var self = this;
+      var self = this;
 
-        self.client.update({
-            index: self.index,
-            id: self.id,
-            type: self.elasticType,
-            body: self.body
-        }).then(function(results) {
-            self.set('body', undefined);
-            self._setResults(results);
-            self._setLastError(null);
-        }).catch(function(err) {
-            self.set('body', undefined);
-            self._setLastError(err);
-        });
+      self.client.update({
+        index: self.index,
+        id: self.id,
+        type: self.elasticType,
+        body: self.body
+      }).then(function(results) {
+        self.set('body', undefined);
+        self._setResults(results);
+        self._setLastError(null);
+      }).catch(function(err) {
+        self.set('body', undefined);
+        self._setLastError(err);
+      });
     }
   });
 </script>
