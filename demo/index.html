@@ -19,42 +19,43 @@ limitations under the License.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>elastic-update Demo</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <link rel="import" href="../../elastic-client/elastic-client.html">
     <link rel="import" href="../elastic-update.html">
   </head>
   <body unresolved>
-    <template is="dom-bind" id="demo">
-      <p>Request body: {doc: {title: "shore, I thought I would sail about a\n"}}</p>
-      <p>Record id to update in mockads index: 3</p>
+    <dom-bind>
+      <script>
+        (function(document) {
+          var domBind = document.querySelector('dom-bind');
 
-      <elastic-client
-        config='{"host": "http://localhost:9200"}'
-        client="{{esclient}}"
-        cluster-status="{{my-status}}">
-      </elastic-client>
+          domBind.stringify = function(json) {
+            return JSON.stringify(json);
+          };
+        })(document);
+      </script>
+      <template is="dom-bind" id="demo">
+        <p>Request body: {doc: {title: "shore, I thought I would sail about a\n"}}</p>
+        <p>Record id to update in mockads index: 3</p>
 
-      <elastic-update
-        client="[[esclient]]"
-        index="mockads"
-        id="3"
-        elastic-type="ad"
-        body='{doc: {title: "shore, I thought I would sail about a\n"}}'
-        results="{{data}}" 
-        last-error="{{error}}">
-      </elastic-update>
-
-      <p>Record info after update on mockads index: {{stringify(data)}}</p>
-
-    </template>
-    <script>
-      (function(document) {
-        var demo = document.querySelector('#demo');
-
-        demo.stringify = function(json) {
-          return JSON.stringify(json);
-        };
-      })(document);
-    </script>
+        <elastic-client
+          config='{"host": "http://localhost:9200"}'
+          client="{{esclient}}"
+          cluster-status="{{my-status}}">
+        </elastic-client>
+        <template is="dom-if" if=[[esclient]]>
+          <elastic-update
+            client="[[esclient]]"
+            index="mockads"
+            id="3"
+            elastic-type="ad"
+            body='{doc: {title: "shore, I thought I would sail about a\n"}}'
+            results="{{data}}" 
+            last-error="{{error}}">
+          </elastic-update>
+        </template>
+        <p>Record info after update on mockads index: {{stringify(data)}}</p>
+      </template>
+    </dom-bind>
   </body>
 </html>
