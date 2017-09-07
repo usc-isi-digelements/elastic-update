@@ -144,7 +144,9 @@ A Polymer Element providing a way to update a single elasticsearch document base
     */
     _update: function() {
       var self = this;
-
+      if(!body || !id || !elasticType || !client || !index) {
+        return;
+      }
       self.client.update({
         index: self.index,
         id: self.id,
