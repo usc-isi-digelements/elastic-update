@@ -27,56 +27,40 @@ limitations under the License.
   <body>
     <test-fixture id="elastic-update-fixture">
       <template>
-        <elastic-update index="mockads" id="3" elastic-type="ad" 
-          results="{{data}}" error="{{error}}">
-        </elastic-update>
-      </template>
-    </test-fixture>
-
-    <test-fixture id="bad-id">
-      <template>
-        <elastic-update index="mockads" id="2didk" elastic-type="ad" 
-          results="{{data}}" last-error="{{error}}">
+        <elastic-update>
         </elastic-update>
       </template>
     </test-fixture>
 
     <script>
-      var client, esUpdate, esUpdateBad;
-
       suite('<elastic-update>', function() {
+        var client, esUpdate;
+
         setup(function() {
           esUpdate = fixture('elastic-update-fixture');
-          esUpdateBad = fixture('bad-id');
-          
+          esUpdate.index = 'mockads';
+          esUpdate.elasticType = 'ad';
+          esUpdate.id = '3';
           client = new elasticsearch.Client({host: 'http://localhost:9200'});
-
           esUpdate.client = client;
-          esUpdateBad.client = client;
         });
 
         test('defines the index property', function () {
           assert.equal(esUpdate.index, 'mockads');
-          assert.equal(esUpdateBad.index, 'mockads');
         });
 
         test('defines the id property', function () {
           assert.equal(esUpdate.id, '3');
-          assert.equal(esUpdateBad.id, '2didk');
         });
 
         test('defines the elastic-type property', function() {
           assert.deepEqual(esUpdate.elasticType, 'ad');
-          assert.deepEqual(esUpdateBad.elasticType, 'ad');
         });
 
         test('other properties are initialized as null/undefined by default', function() {
           assert.isUndefined(esUpdate.body);
-          assert.isUndefined(esUpdateBad.body);
           assert.isNull(esUpdate.results);
-          assert.isNull(esUpdateBad.results);
           assert.isUndefined(esUpdate.lastError);
-          assert.isUndefined(esUpdateBad.lastError);
         });
 
         test('does not have html content', function() {
@@ -90,21 +74,33 @@ limitations under the License.
             assert.equal(esUpdate.results._type, esUpdate.elasticType);
             assert.equal(esUpdate.results._id, esUpdate.id);
             assert.isNumber(esUpdate.results._version);
-            assert.isUndefined(esUpdate.lastError);
+            assert.isNull(esUpdate.lastError);
             done();
           });
           esUpdate.body = {doc: {title: "shore, I thought I would sail about a\n"}};
         });
 
         test('if error occurs, persists error to lastError', function (done) {
-          esUpdateBad.addEventListener('last-error-changed', function (event) {
-            assert.isUndefined(esUpdateBad.body);
-            assert.isDefined(esUpdateBad.lastError);
-            done();
+          esUpdate.id = '2didk';
+          var call = 0;
+          esUpdate.addEventListener('last-error-changed', function (event) {
+            call++;
+            if(call === 1) {
+              assert.deepEqual(esUpdate.body, {
+                doc: {
+                  title: "shore, I thought I would sail about a\n"
+                }
+              });
+              assert.isNull(esUpdate.lastError);
+            }
+            if(call === 2) {
+              assert.isUndefined(esUpdate.body);
+              assert.isDefined(esUpdate.lastError);
+              done();
+            }
           });
-          esUpdateBad.body = {doc: {title: "shore, I thought I would sail about a\n"}};
+          esUpdate.body = {doc: {title: "shore, I thought I would sail about a\n"}};
         });
-
       });
     </script>
   </body>

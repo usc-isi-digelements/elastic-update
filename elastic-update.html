@@ -133,29 +133,36 @@ A Polymer Element providing a way to update a single elasticsearch document base
     },
 
     observers: [
-      '_update(body, id, elasticType, client, index)'
+      'update(body, client, index, elasticType, id)'
     ],
 
     /**
-    * Perform update on elasticsearch record based on inputs.
-    * Will set results or error property depending on outcome.
-    *
-    * @private
-    */
-    _update: function() {
-      var self = this;
-      if(!body || !id || !elasticType || !client || !index) {
+     * Perform update on elasticsearch record based on inputs.
+     * Will set results or error property depending on outcome.
+     *
+     * @param {Object} updateBody
+     * @param {Object} esClient
+     * @param {String} indexName
+     * @param {String} indexType
+     * @param {String} updateId
+     */
+    update: function(updateBody, esClient, indexName, indexType, updateId) {
+      if(!updateBody || !esClient || !indexName || !indexType || !updateId) {
         return;
       }
-      self.client.update({
-        index: self.index,
-        id: self.id,
-        type: self.elasticType,
-        body: self.body
+
+      var self = this;
+      self._setResults(null);
+      self._setLastError(null);
+
+      esClient.update({
+        index: indexName,
+        id: updateId,
+        type: indexType,
+        body: updateBody
       }).then(function(results) {
         self.set('body', undefined);
         self._setResults(results);
-        self._setLastError(null);
       }).catch(function(err) {
         self.set('body', undefined);
         self._setLastError(err);
