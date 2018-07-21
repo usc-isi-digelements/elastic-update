@@ -12,17 +12,17 @@
     "elastic.js"
   ],
   "main": "elastic-update.html",
-  "homepage": "https://github.com/DigElements/elastic-update/",
+  "homepage": "https://github.com/usc-isi-digelements/elastic-update/",
   "ignore": [
     "/.*",
     "/test/"
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.2",
-    "elastic-client": "DigElements/elastic-client#2.1.0"
+    "elastic-client": "usc-isi-digelements/elastic-client#2.1.0"
   },
   "devDependencies": {
-    "elastic-client-search": "DigElements/elastic-client-search#2.2.0",
+    "elastic-client-search": "usc-isi-digelements/elastic-client-search#2.2.0",
     "iron-component-page": "PolymerElements/iron-component-page#^2.0.0",
     "web-component-tester": "^6.0.0"
   },
